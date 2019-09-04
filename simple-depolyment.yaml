@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: echo
+  labels:
+    app: echo
+spec:
+  replicas: 3
+  selector:
+    matchLabels
+      app: echo
+  template: # template는 pod와 동일
+    containers:
+    - name: nginx
+      image: ddd/nginx:latest
+      env:
+      - name: BACKEND_HOST
+        value: localhost:8080
+      ports:
+      - containerPort: 80
+    - name: echo
+      image: dd/echo:latest
+      ports:
+      - containerPort: 8080
